@@ -1,14 +1,26 @@
 
 import 'dotenv/config' 
 import express from 'express'
+import cors from 'cors'
 const app = express()
 const port = process.env.PORT || 3000
+
+var whitelist = ['https://halwai-menu.vercel.app/']
+var corsOptions = {
+  origin: function (origin, callback) {
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true)
+    } else {
+      callback(new Error('Not allowed by CORS'))
+    }
+  }
+}
 
 app.get('/', (req,res)=>{
   res.send("Welcome to Halwai Party Menu")
 })
 
-app.get('/apiv1/partyMenu', (req, res) => {
+app.get('/apiv1/partyMenu', cors(corsOptions), (req, res) => {
   const partyMenu = {
     "FRESH JUICE": [
         "Pineapple",
@@ -104,7 +116,7 @@ app.get('/apiv1/partyMenu', (req, res) => {
   res.send(partyMenu)
 })
 
-app.get('/apiv1/partPackage', (req,res)=>{
+app.get('/apiv1/partPackage', cors(corsOptions), (req,res)=>{
   const partPackage = {
     "packages": [
       {
