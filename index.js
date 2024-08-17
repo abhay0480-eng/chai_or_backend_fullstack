@@ -8,7 +8,7 @@ app.get('/', (req,res)=>{
   res.send("Welcome to Halwai Party Menu")
 })
 
-app.get('/partyMenu', (req, res) => {
+app.get('/api/partyMenu', (req, res) => {
   const partyMenu = {
     "FRESH JUICE": [
         "Pineapple",
@@ -104,7 +104,7 @@ app.get('/partyMenu', (req, res) => {
   res.send(partyMenu)
 })
 
-app.get('/partPackage', (req,res)=>{
+app.get('/api/partPackage', (req,res)=>{
   const partPackage = {
     "packages": [
       {
